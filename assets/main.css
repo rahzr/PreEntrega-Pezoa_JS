@@ -1,0 +1,86 @@
+:root {
+  /* Variables colores */
+  --turquoise: #00D2CF !important;
+  --blue-dark: #1D1B21 !important;
+  --blue-darker: #101216 !important;
+  --red: #FF0000 !important;
+  --white: #FFFFFF !important;
+  --black: #000000 !important;
+  --gray100: #999999 !important;
+  --gray200: #F7F7F7 !important;
+}
+/* ESTILOS GENERALES */
+* {
+  font-family: 'Poppins', sans-serif !important;
+}
+
+html {
+  background-color: var(--blue-darker);
+}
+.hidden {
+  display: none;
+}
+
+.uk-navbar-container {
+  background-color: var(--blue-dark) !important;
+}
+
+.product-card {
+  background: var(--blue-darker);
+  border: 1px solid var(--blue-dark);
+  padding: 15px;
+}
+.product-card .sku {
+  position: absolute;
+  background: #000;
+  right: 5px;
+  top: 5px;
+  font-size: 12px;
+  padding: 3px 5px;
+}
+.product-card .atributos span {
+  background-color: var(--blue-dark);
+  padding: 3px 5px;
+}
+.product-card .oferta {
+  font-size: 21px;
+  color: var(--turquoise);
+  font-weight: 800;
+  padding-top: 15px;
+}
+.product-card .normal {
+  padding-top: 3px;
+}
+.product-card .btn-agrega {
+  cursor: pointer;
+  font-weight: 800;
+  text-transform: uppercase;
+  background-color: var(--turquoise);
+  color: var(--blue-darker);
+}
+.product-card .btn-agrega:hover {
+  background-color: var(--turquoise);
+}
+/* ESTILOS CARRITO */
+.uk-navbar-right .uk-navbar-dropdown {
+  min-width: 300px;
+}
+
+#carrito .info {
+  background-color: var(--gray200) !important;
+  padding: 10px;
+  margin: 10px 0;
+}
+#carrito .info div{
+  font-size: 12px;
+  color: var(--blue-dark);
+}
+#carrito .info .modelo,  #carrito .info .oferta {
+  font-size: 16px;
+  font-weight: 600;
+}
+#carrito .btn-quitar {
+  background-color: var(--gray100) !important;
+  padding: 10px 0;
+  cursor: pointer;
+}

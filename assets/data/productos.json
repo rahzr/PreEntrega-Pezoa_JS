@@ -1,0 +1,46 @@
+[
+  {
+    "id": "00001",
+    "marca": "Apple",
+    "modelo": "iPhone 14",
+    "color": "Blanco",
+    "capacidad": "128 GB",
+    "oferta": 899990,
+    "precio": 1199990,
+    "disponible": true,
+    "rutaImg": "assets/img/smartphones/apple-iphone-14-blanco.png"
+  },
+  {
+    "id": "00002",
+    "marca": "Apple",
+    "modelo": "iPhone 13",
+    "color": "Negro",
+    "capacidad": "128 GB",
+    "oferta": 799990,
+    "precio": 1099990,
+    "disponible": true,
+    "rutaImg": "assets/img/smartphones/apple-iphone-14-negro.png"
+  },
+  {
+    "id": "00003",
+    "marca": "Samsung",
+    "modelo": "Galaxy S23",
+    "color": "Negro",
+    "capacidad": "128 GB",
+    "oferta": 799990,
+    "precio": 1100990,
+    "disponible": true,
+    "rutaImg": "assets/img/smartphones/samsung-galaxy-s23-negro.png"
+  },
+  {
+    "id": "00004",
+    "marca": "Samsung",
+    "modelo": "Galaxy S23 Ultra",
+    "color": "Negro",
+    "capacidad": "128 GB",
+    "oferta": 999990,
+    "precio": 1200990,
+    "disponible": true,
+    "rutaImg": "assets/img/smartphones/samsung-galaxy-s23-negro.png"
+  }
+]
