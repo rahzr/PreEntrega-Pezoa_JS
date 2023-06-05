@@ -146,4 +146,17 @@ hr {
     margin-left: unset;
     margin-top: 20px;
   }
+  .uk-navbar-center {
+    position: relative!important;
+    top: unset !important;
+    left: unset !important;
+    transform: unset !important;
+  }
+  .uk-search-default {
+    width: unset;
+  }
+  .uk-navbar-nav a {
+    min-height: 30px !important;
+    margin-bottom: 20px;
+  }
 }
