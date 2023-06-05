@@ -17,18 +17,47 @@
 html {
   background-color: var(--blue-darker);
 }
+hr {
+  border-color: var(--gray100) !important;
+  opacity: 0.3;
+}
 .hidden {
   display: none;
+}
+.uk-search-default {
+  width: 400px;
 }
 
 .uk-navbar-container {
   background-color: var(--blue-dark) !important;
 }
 
+.categorias {
+  border: solid 1px var(--blue-dark);
+  padding: 20px;
+}
+.categorias hr {
+  border-color: var(--blue-dark) !important;
+}
+.categorias ul li {
+  cursor: pointer;
+  line-height: 1.8;
+}
+.categorias ul li:hover {
+  text-decoration: underline;
+  color: var(--turquoise);
+}
+
 .product-card {
   background: var(--blue-darker);
   border: 1px solid var(--blue-dark);
   padding: 15px;
+  transition: ease 0.5s;
+  opacity: 0.7;
+}
+.product-card:hover {
+  border: 1px solid var(--turquoise);
+  opacity: 1;
 }
 .product-card .sku {
   position: absolute;
@@ -38,14 +67,20 @@ html {
   font-size: 12px;
   padding: 3px 5px;
 }
+.product-card .modelo {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--turquoise);
+  margin-bottom: 5px;
+}
 .product-card .atributos span {
   background-color: var(--blue-dark);
   padding: 3px 5px;
 }
 .product-card .oferta {
-  font-size: 21px;
-  color: var(--turquoise);
-  font-weight: 800;
+  font-size: 24px;
+  color: var(--white);
+  font-weight: 700;
   padding-top: 15px;
 }
 .product-card .normal {
@@ -57,9 +92,13 @@ html {
   text-transform: uppercase;
   background-color: var(--turquoise);
   color: var(--blue-darker);
+  transition: ease 0.5s;
+  opacity: 0.5;
 }
 .product-card .btn-agrega:hover {
   background-color: var(--turquoise);
+  color: var(--blue-darker);
+  opacity: 1;
 }
 /* ESTILOS CARRITO */
 .uk-navbar-right .uk-navbar-dropdown {
@@ -67,13 +106,19 @@ html {
 }
 
 #carrito .info {
+  display: flex;
   background-color: var(--gray200) !important;
   padding: 10px;
   margin: 10px 0;
 }
-#carrito .info div{
+#carrito .info figure {
+  max-width: 30%;
+  margin-right: 10px;
+}
+#carrito .info div {
   font-size: 12px;
   color: var(--blue-dark);
+  width: 100%;
 }
 #carrito .info .modelo,  #carrito .info .oferta {
   font-size: 16px;
@@ -83,4 +128,22 @@ html {
   background-color: var(--gray100) !important;
   padding: 10px 0;
   cursor: pointer;
+}
+
+/* Custom Toastify */
+.toastify-avatar {
+  width: 70px;
+  height: 70px;
+  margin: 0 10px 0 0;
+}
+@media (max-width: 767px){
+  .uk-navbar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .uk-navbar-right {
+    margin-left: unset;
+    margin-top: 20px;
+  }
 }

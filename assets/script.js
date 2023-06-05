@@ -1,32 +1,38 @@
 let sPhoneData;
 let carritoData = [];
+let marcasFiltradas = new Set();
 
 fetch('assets/data/productos.json')
   .then(response => response.json())
   .then(data => {
     sPhoneData = data;
     muestraDatos();
+    addMarcas();
   })
   .catch(error => {
     console.error('Error json:', error);
   });
-  
 
 function muestraDatos() {
   let gridProductos = document.querySelector(".grid-productos");
-  let fragment = document.createDocumentFragment();
+  let fragmento = document.createDocumentFragment();
 
-  // Itera sobre los productos
+  // itera sobre los productos
   sPhoneData.forEach(item => {
     let productCard = document.createElement("div");
     let precioFormateado = item.precio.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     let ofertaFormateada = item.oferta.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
-    productCard.innerHTML =  `
-      <div class="product-card uk-card uk-light uk-relative">
+    productCard.classList.add("uk-width-1-2", "uk-width-1-4@m", "product-card");
+
+    productCard.innerHTML = `
+      <div class="uk-card uk-light uk-relative">
         <span class="sku">${item.id}</span>
+        <figure>
+          <img class="img-producto" src="${item.rutaImg}"/>
+        </figure>
         <div class="marca uk-text-small">${item.marca}</div>
-        <h3 class="modelo uk-card-title uk-margin-remove">${item.modelo}</h3>
+        <div class="modelo uk-card-title">${item.modelo}</div>
         <div class="uk-text-small atributos">
           <span class="color">${item.color}</span>
           <span class="capacidad">${item.capacidad}</span>
@@ -36,16 +42,13 @@ function muestraDatos() {
         <button class="btn-agrega uk-button-default uk-padding-small uk-width-1-1 uk-margin-top">Agregar al carrito</button>
       </div>`;
 
-    // Agrega html de producto a fragment
-    fragment.appendChild(productCard);
-    // console.log(sPhoneData);
+    fragmento.appendChild(productCard);
   });
 
-  // Limpia y agrega el fragmento al contenedor
+  // limpia y agrega el fragmento al contenedor
   gridProductos.innerHTML = "";
-  gridProductos.appendChild(fragment);
+  gridProductos.appendChild(fragmento);
 
-  // Barra de buscar
   let searchBox = document.querySelector(".uk-search-input");
   let searchForm = document.querySelector(".uk-search");
 
@@ -62,7 +65,7 @@ function muestraDatos() {
     let searchTerm = searchBox.value.toLowerCase();
     let productCards = document.querySelectorAll(".grid-productos .product-card");
 
-    // Itera sobre html de producto, muestra/ocults segun la busqueda
+    // itera sobre html de producto, muestra y oculta segun la busqueda
     productCards.forEach(card => {
       let marca = card.querySelector(".product-card .marca").textContent.toLowerCase();
       let modelo = card.querySelector(".product-card .modelo").textContent.toLowerCase();
@@ -77,13 +80,14 @@ function muestraDatos() {
     });
   }
 
-  // Manejo del btn "agregar al carrito"
+  // manejo del boton agregar al carrito
   let addToCartButtons = document.querySelectorAll(".btn-agrega");
 
   addToCartButtons.forEach(button => {
     button.addEventListener("click", () => {
       let productCard = button.closest(".product-card");
       let sku = productCard.querySelector(".sku").textContent;
+      let imgProducto = productCard.querySelector(".img-producto").getAttribute("src");
       let marca = productCard.querySelector(".marca").textContent;
       let modelo = productCard.querySelector(".modelo").textContent;
       let color = productCard.querySelector(".color").textContent;
@@ -91,48 +95,97 @@ function muestraDatos() {
 
       let carritoInfo = document.createElement("div");
       carritoInfo.classList.add("info");
-      
+
       carritoInfo.innerHTML = `
+      <figure>
+        <img src="${imgProducto}"/>
+      </figure>
+      <div>
         <div class="marca">${marca}</div>
         <div class="modelo">${modelo}</div>
         <div class="color">${color}</div>
         <div class="oferta">${oferta}</div>
-        <button class="btn-quitar uk-button-default uk-width-1-1 uk-margin-top">Quitar</button>`;
+        <button class="btn-quitar uk-button-default uk-width-1-1 uk-margin-top">Quitar</button>
+      </div>`;
 
-      // Agrega la informacion del producto al carrito
       document.querySelector("#carrito").appendChild(carritoInfo);
 
-      // Agrega el producto al arreglo de datos carrito
-      carritoData.push({ sku, marca, modelo, color, oferta });
+      carritoData.push({
+        sku,
+        marca,
+        modelo,
+        color,
+        oferta
+      });
 
-      // Actualiza el carrito y guarda datoss
       updateCarrito();
       saveCarritoData();
 
       let removeButton = carritoInfo.querySelector(".btn-quitar");
+
       removeButton.addEventListener("click", () => {
-        // Quita la informacion del producto carrito
+
         carritoInfo.remove();
 
-        // Encuentra el indice del producto en el arreglo y lo quita
+        // encuentra el indice del producto en el arreglo y lo quita
         let index = carritoData.findIndex(product => product.sku === sku);
         if (index !== -1) {
           carritoData.splice(index, 1);
         }
 
-        // Actualiza el carrito y guarda los datos
         updateCarrito();
         saveCarritoData();
+
+        // notificacion de toastify cuando se elimina un producto
+        Toastify({
+          text: `${marca} ${modelo} fue eliminado del carrito`,
+          avatar: `${imgProducto}`,
+          duration: 3000,
+          newWindow: true,
+          close: true,
+          gravity: "top",
+          position: "center",
+          stopOnFocus: true,
+          style: {
+            background: "var(--red)",
+          },
+          onClick: function () {} // Callback after click
+        }).showToast();
       });
+
+      // notificacion de toastify cuando se agrega un producto
+      Toastify({
+        text: `${marca} ${modelo} fue agregado al carrito`,
+        avatar: `${imgProducto}`,
+        duration: 3000,
+        newWindow: true,
+        close: true,
+        gravity: "top",
+        position: "center",
+        stopOnFocus: true,
+        style: {
+          background: "var(--turquoise)",
+          color: "var(--blue-dark)"
+        },
+        onClick: function () {} // Callback after click
+      }).showToast();
     });
   });
 
   function updateCarrito() {
-    // Actualiza el contenido del carrito con los datos carritoData
+    let valorTotal = 0;
+
+    carritoData.forEach(product => {
+      let precio = Number(product.oferta.replace("$", "").replace(".", ""));
+      valorTotal += precio;
+    });
+
+    let valorTotalFormateado = valorTotal.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    document.querySelector(".valor-total").textContent = `$${valorTotalFormateado}`;
   }
 
   function saveCarritoData() {
-    // Guarda datos del carrito en local storage
+    // Guarda los datos del carrito en local storage
     localStorage.setItem("carritoData", JSON.stringify(carritoData));
   }
 
@@ -143,7 +196,7 @@ function muestraDatos() {
       carritoData.forEach(product => {
         let carritoInfo = document.createElement("div");
         carritoInfo.classList.add("info");
-        
+
         carritoInfo.innerHTML = `
         <div class="marca">${product.marca}</div>
         <div class="modelo">${product.modelo}</div>
@@ -151,21 +204,20 @@ function muestraDatos() {
         <div class="oferta">${product.oferta}</div>
         <button class="btn-quitar uk-button-default uk-width-1-1 uk-margin-top">Quitar</button>`;
 
-        // Agrega la informacion del producto al carrito
+        // Agrega la información del producto al carrito
         document.querySelector("#carrito").appendChild(carritoInfo);
 
         let removeButton = carritoInfo.querySelector(".btn-quitar");
+
         removeButton.addEventListener("click", () => {
-          // Elimina la informacion del producto del carrito
+          // Quita la información del producto del carrito
           carritoInfo.remove();
 
-          // Encuentra el indice del producto en el arreglo y lo quita
           let index = carritoData.findIndex(p => p.sku === product.sku);
           if (index !== -1) {
             carritoData.splice(index, 1);
           }
 
-          // Actualiza carrito y guarda datos
           updateCarrito();
           saveCarritoData();
         });
@@ -173,6 +225,67 @@ function muestraDatos() {
     }
   }
 
-
   loadCarritoData();
 }
+
+
+function addMarcas() {
+  let marcasContainer = document.querySelector(".marcas");
+  let marcas = new Set();
+
+  sPhoneData.forEach(item => {
+    marcas.add(item.marca);
+  });
+
+  marcas.forEach(marca => {
+    let marcaItem = document.createElement("li");
+    marcaItem.classList.add("marca-item");
+    marcaItem.textContent = marca;
+
+    marcaItem.addEventListener("click", () => {
+      if (marcasFiltradas.has(marca)) {
+        marcasFiltradas.delete(marca);
+        marcaItem.classList.remove("marca-selected");
+      } else {
+        marcasFiltradas.add(marca);
+        marcaItem.classList.add("marca-selected");
+      }
+
+      applyFiltros();
+    });
+
+    marcasContainer.appendChild(marcaItem);
+  });
+
+  let verTodos = document.createElement("li");
+  verTodos.classList.add("marca-item");
+  verTodos.textContent = "Ver todos";
+
+  verTodos.addEventListener("click", () => {
+    marcasFiltradas.clear();
+    applyFiltros();
+    // quita la clase marca-selected de todos los elementos
+    let marcaItems = document.querySelectorAll(".marcas .marca-item");
+    marcaItems.forEach(item => {
+      item.classList.remove("marca-selected");
+    });
+  });
+
+  marcasContainer.appendChild(verTodos);
+}
+
+function applyFiltros() {
+  let productCards = document.querySelectorAll(".grid-productos .product-card");
+
+  productCards.forEach(card => {
+    let marca = card.querySelector(".product-card .marca").textContent;
+
+    if (marcasFiltradas.size === 0 || marcasFiltradas.has(marca)) {
+      card.classList.remove("hidden");
+    } else {
+      card.classList.add("hidden");
+    }
+  });
+}
+
+muestraDatos();

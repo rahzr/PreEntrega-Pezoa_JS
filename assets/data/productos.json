@@ -3,23 +3,23 @@
     "id": "00001",
     "marca": "Apple",
     "modelo": "iPhone 14",
-    "color": "Blanco",
+    "color": "Negro",
     "capacidad": "128 GB",
     "oferta": 899990,
     "precio": 1199990,
     "disponible": true,
-    "rutaImg": "assets/img/smartphones/apple-iphone-14-blanco.png"
+    "rutaImg": "assets/img/smartphones/apple-iphone-14-negro.png"
   },
   {
     "id": "00002",
     "marca": "Apple",
     "modelo": "iPhone 13",
-    "color": "Negro",
+    "color": "Blanco",
     "capacidad": "128 GB",
     "oferta": 799990,
     "precio": 1099990,
     "disponible": true,
-    "rutaImg": "assets/img/smartphones/apple-iphone-14-negro.png"
+    "rutaImg": "assets/img/smartphones/apple-iphone-13-blanco.png"
   },
   {
     "id": "00003",
@@ -41,6 +41,72 @@
     "oferta": 999990,
     "precio": 1200990,
     "disponible": true,
-    "rutaImg": "assets/img/smartphones/samsung-galaxy-s23-negro.png"
+    "rutaImg": "assets/img/smartphones/samsung-galaxy-s23-ultra-negro.png"
+  },
+  {
+    "id": "00005",
+    "marca": "Xiaomi",
+    "modelo": "12 Lite",
+    "color": "Negro",
+    "capacidad": "128 GB",
+    "oferta": 260000,
+    "precio": 340990,
+    "disponible": true,
+    "rutaImg": "assets/img/smartphones/xiaomi-12-lite-negro.png"
+  },
+  {
+    "id": "00006",
+    "marca": "Xiaomi",
+    "modelo": "12T Pro",
+    "color": "Negro",
+    "capacidad": "256 GB",
+    "oferta": 330000,
+    "precio": 450990,
+    "disponible": true,
+    "rutaImg": "assets/img/smartphones/xiaomi-12t-pro-negro.png"
+  },
+  {
+    "id": "00007",
+    "marca": "Xiaomi",
+    "modelo": "A1",
+    "color": "Negro",
+    "capacidad": "64 GB",
+    "oferta": 83000,
+    "precio": 150990,
+    "disponible": true,
+    "rutaImg": "assets/img/smartphones/xiaomi-a1.png"
+  },
+  {
+    "id": "00008",
+    "marca": "Motorola",
+    "modelo": "Moto G53",
+    "color": "Azul",
+    "capacidad": "64 GB",
+    "oferta": 169990,
+    "precio": 210990,
+    "disponible": true,
+    "rutaImg": "assets/img/smartphones/moto-g53-blue.png"
+  },
+  {
+    "id": "00009",
+    "marca": "Motorola",
+    "modelo": "Moto G13",
+    "color": "Negro",
+    "capacidad": "128 GB",
+    "oferta": 269990,
+    "precio": 280990,
+    "disponible": true,
+    "rutaImg": "assets/img/smartphones/motorola-moto-g13.png"
+  },
+  {
+    "id": "00010",
+    "marca": "Motorola",
+    "modelo": "Edge 30 Neo",
+    "color": "Negro",
+    "capacidad": "128 GB",
+    "oferta": 369990,
+    "precio": 480990,
+    "disponible": true,
+    "rutaImg": "assets/img/smartphones/motorola-edge30-neo.png"
   }
 ]
