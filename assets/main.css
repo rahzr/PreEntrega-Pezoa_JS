@@ -129,6 +129,11 @@ hr {
   padding: 10px 0;
   cursor: pointer;
 }
+#TotalForm {
+  font-weight: 600;
+  color: var(--blue-dark);
+  font-size: 30px;
+}
 
 /* Custom Toastify */
 .toastify-avatar {
@@ -158,5 +163,18 @@ hr {
   .uk-navbar-nav a {
     min-height: 30px !important;
     margin-bottom: 20px;
+  }
+}
+@media (max-width: 560px){
+  .toastify {
+    max-width: 250px;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+  }
+  .toastify-avatar {
+    width: 30px;
+    height: 30px;
+    margin: 0 10px 0 0;
   }
 }

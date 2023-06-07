@@ -14,6 +14,10 @@ fetch('assets/data/productos.json')
   });
 
 function muestraDatos() {
+  if (!sPhoneData) {
+    return;
+  }
+
   let gridProductos = document.querySelector(".grid-productos");
   let fragmento = document.createDocumentFragment();
 
@@ -138,7 +142,7 @@ function muestraDatos() {
 
         // notificacion de toastify cuando se elimina un producto
         Toastify({
-          text: `${marca} ${modelo} fue eliminado del carrito`,
+          text: `${marca} ${modelo} eliminado al carrito`,
           avatar: `${imgProducto}`,
           duration: 3000,
           newWindow: true,
@@ -155,7 +159,7 @@ function muestraDatos() {
 
       // notificacion de toastify cuando se agrega un producto
       Toastify({
-        text: `${marca} ${modelo} fue agregado al carrito`,
+        text: `${marca} ${modelo} agregado al carrito`,
         avatar: `${imgProducto}`,
         duration: 3000,
         newWindow: true,
@@ -174,18 +178,59 @@ function muestraDatos() {
 
   function updateCarrito() {
     let valorTotal = 0;
-
+    let pedidoTexto = "";
+  
     carritoData.forEach(product => {
       let precio = Number(product.oferta.replace("$", "").replace(".", ""));
       valorTotal += precio;
+  
+      // agrega la información del producto al texto del pedido
+      pedidoTexto += " - " + `${product.marca} ${product.modelo}`;
     });
-
+  
     let valorTotalFormateado = valorTotal.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-    document.querySelector(".valor-total").textContent = `$${valorTotalFormateado}`;
+    document.getElementById("TotalForm").textContent = `$${valorTotalFormateado}`;
+  
+    // actualiza el contenido del input del pedido
+    document.getElementById("pedido").value = pedidoTexto;
+    document.querySelector(".valor-total").textContent = valorTotalFormateado;
+
+    // console.log(pedidoTexto);
+    // console.log(valorTotalFormateado);
   }
 
+  let formCarrito = document.getElementById("formCarrito");
+
+  formCarrito.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    // valores del formulario
+    let nombre = document.getElementById("nombre").value;
+    let telefono = document.getElementById("telefono").value;
+    let correo = document.getElementById("correo").value;
+    let pedido = document.getElementById("pedido").value;
+    let pedidoTotal = document.getElementById("TotalForm").textContent;
+
+    // verificar que la iformacion esta siendo rescatada
+    // console.log("Nombre:", nombre);
+    // console.log("Teléfono:", telefono);
+    // console.log("Correo electrónico:", correo);
+    // console.log("Pedido:", pedido);
+    // console.log("Total:", pedidoTotal);
+
+    // limpia el carrito
+    carritoData = [];
+    document.querySelector("#carrito").innerHTML = "";
+
+    // limpia el local storage
+    localStorage.removeItem("carritoData");
+
+    updateCarrito();
+  });
+
+
   function saveCarritoData() {
-    // Guarda los datos del carrito en local storage
+    // guarda los datos del carrito en local storage
     localStorage.setItem("carritoData", JSON.stringify(carritoData));
   }
 

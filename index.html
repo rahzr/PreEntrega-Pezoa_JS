@@ -62,7 +62,7 @@
                   <span>Total:</span>
                   <span class="valor-total">$0</span>
                 </div>
-                <button class="btn-comprar uk-button uk-width-1-1 uk-margin-top">Solicitar productos</button>
+                <button class="btn-comprar uk-button uk-width-1-1 uk-margin-top" uk-toggle="target: #modal-form" type="button">Solicitar productos</button>
               </div>
             </div>
           </li>
@@ -72,31 +72,6 @@
     </div>
   </div>
 </nav>
-
-<!-- SLIDER PRINCIPAL [OCULTO] -->
-<figure class="uk-hidden uk-container uk-margin-large-top">
-  <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1"
-    uk-slideshow="max-height: 400; animation: push">
-
-    <ul class="uk-slideshow-items">
-      <li>
-        <img src="https://loremflickr.com/1200/400?random=1" alt="">
-      </li>
-      <li>
-        <img src="https://loremflickr.com/1200/400?random=2" alt="">
-      </li>
-      <li>
-        <img src="https://loremflickr.com/1200/400?random=3" alt="">
-      </li>
-    </ul>
-
-    <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous
-      uk-slideshow-item="previous"></a>
-    <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next
-      uk-slideshow-item="next"></a>
-
-  </div>
-</figure>
   
 <main class="uk-container uk-container-large uk-margin-large-top">
 <div class="uk-grid">
@@ -120,6 +95,75 @@
   </div>
 </div>
 </main>
+
+<!-- MODAL CARRITO -->
+<div id="modal-form" uk-modal>
+  <div class="uk-modal-dialog uk-modal-body" role="dialog" aria-modal="true">
+    <button class="uk-modal-close-default uk-icon uk-close" type="button" uk-close="" aria-label="Close">
+      <!-- boton cerrar -->
+    </button>
+    <!-- CONTENIDO -->
+    <div>
+      <h3>Solicitud de productos</h3>
+      <!-- formulario -->
+      <form id="formCarrito" class="uk-form-stacked">
+        <div class="uk-margin">
+          <label class="uk-form-label" for="nombre">Nombre</label>
+          <div class="uk-form-controls">
+            <input class="uk-input" type="text" id="nombre" name="nombre" placeholder="Ingresa tu nombre completo"
+              required>
+          </div>
+        </div>
+
+        <div class="uk-margin">
+          <label class="uk-form-label" for="telefono">Número de teléfono</label>
+          <div class="uk-form-controls">
+            <input class="uk-input" type="tel" id="telefono" name="telefono" placeholder="Ingresa tu número de teléfono"
+              required>
+          </div>
+        </div>
+
+        <div class="uk-margin">
+          <label class="uk-form-label" for="correo">Correo electrónico</label>
+          <div class="uk-form-controls">
+            <input class="uk-input" type="email" id="correo" name="correo" placeholder="Ingresa tu correo electrónico"
+              required>
+          </div>
+        </div>
+
+        <div class="uk-margin">
+          <label class="uk-form-label" for="pedido">Resumen del pedido</label>
+          <div class="uk-form-controls">
+            <input id="pedido" class="uk-input" type="text" id="pedido" name="pedido" readonly>
+          </div>
+        </div>
+
+        <div class="uk-margin">
+          <label class="uk-form-label">El total de tu pedido es:</label>
+          <div class="uk-form-controls">
+            <span id="TotalForm">$0</span>
+          </div>
+        </div>
+
+        <button class="uk-button uk-button-primary" type="submit">Enviar</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL CARRITO -->
+<div id="modal-gracias" uk-modal>
+  <div class="uk-modal-dialog uk-modal-body" role="dialog" aria-modal="true">
+    <button class="uk-modal-close-default uk-icon uk-close" type="button" uk-close="" aria-label="Close">
+      <!-- boton cerrar -->
+    </button>
+    <!-- CONTENIDO -->
+    <div class="uk-container uk-container-small uk-padding" style="background-color: aliceblue;">
+      <h3>Solicitud enviada</h3>
+
+    </div>
+  </div>
+</div>
 
   <!-- JAVASCRIPT TOASTIFY -->
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
